@@ -14,15 +14,14 @@ class FolderTableViewController: UITableViewController {
     @IBOutlet var tableViewData: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-       //folderBarButton.setBackgroundImage(UIImage(named: "grey"), for: UIControl.State.normal, barMetrics: .default)
-        //folderBarButton.setBackgroundImage(UIImage(named: ""), for: UIControl.State.normal, style: UIBarButtonItem.Style.plain, barMetrics: UIBarMetrics.default)
-        //folderBarButton.setBackButtonBackgroundVerticalPositionAdjustment(CGFloat.init(bitPattern: 5), for: .default)
+      
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        names = [String]()
+        
         self.navigationItem.rightBarButtonItem = self.editButtonItem
+        names = [String]()
         //navigationController?.navigationBar.barTintColor = UIColor.systemGray
         
     }
@@ -75,6 +74,19 @@ class FolderTableViewController: UITableViewController {
         return UITableViewCell()
     }
     
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        if tableView.isEditing{
+            return .none
+        }
+        else{
+            return .delete
+            
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
 
     /*
     // Override to support conditional editing of the table view.
@@ -92,18 +104,17 @@ class FolderTableViewController: UITableViewController {
             names!.remove(at: indexPath.row)
             tableViewData.reloadData()
         }
-        //else if editingStyle == .insert {
+        
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        //}    
     }
     
 
-    /*
+    
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
 
     }
-    */
+    
 
     /*
     // Override to support conditional rearranging of the table view.
