@@ -9,8 +9,9 @@
 import UIKit
 
 class FolderTableViewController: UITableViewController {
-    var names : [String]?
+    var names: [String]?
     @IBOutlet weak var folderBarButton: UIBarButtonItem!
+    @IBOutlet var tableViewData: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
        //folderBarButton.setBackgroundImage(UIImage(named: "grey"), for: UIControl.State.normal, barMetrics: .default)
@@ -20,6 +21,7 @@ class FolderTableViewController: UITableViewController {
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        names = [String]()
         self.navigationItem.rightBarButtonItem = self.editButtonItem
         //navigationController?.navigationBar.barTintColor = UIColor.systemGray
         
@@ -29,12 +31,12 @@ class FolderTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return names?.count ?? 0
     }
     
     @IBAction func newFolderButton(_ sender: UIBarButtonItem) {
@@ -46,23 +48,32 @@ class FolderTableViewController: UITableViewController {
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let addItemAction = UIAlertAction(title: "Add Item", style: .default) { (UIAlertAction) in
             let name = alertController.textFields![0]
-            self.names?.append(name.text!)
-            self.tableView.reloadData()
+            self.names!.append(name.text!)
+            print(self.names!)
+            self.tableViewData.reloadData()
+            
         }
         alertController.addAction(cancelAction)
         alertController.addAction(addItemAction)
         self.present(alertController, animated: true, completion: nil)
     }
     
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "repeat"){
+            let cellName = names![indexPath.row]
+            cell.textLabel?.text = cellName
+            cell.imageView?.image = UIImage(named: "folder-icon")
+            return cell
+        
+        }
 
-        // Configure the cell...
+        
 
-        return cell
+        return UITableViewCell()
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.
