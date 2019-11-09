@@ -9,7 +9,7 @@
 import UIKit
 
 class FolderTableViewController: UITableViewController {
-
+    var names : [String]?
     @IBOutlet weak var folderBarButton: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +36,24 @@ class FolderTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return 0
     }
-
+    
+    @IBAction func newFolderButton(_ sender: UIBarButtonItem) {
+        
+        let alertController = UIAlertController(title: "New Folder", message: "Enter a name for this folder", preferredStyle: .alert)
+        alertController.addTextField { (textName) in
+            textName.placeholder = "Name"
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let addItemAction = UIAlertAction(title: "Add Item", style: .default) { (UIAlertAction) in
+            let name = alertController.textFields![0]
+            self.names?.append(name.text!)
+            self.tableView.reloadData()
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(addItemAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)

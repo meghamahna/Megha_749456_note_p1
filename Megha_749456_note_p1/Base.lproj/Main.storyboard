@@ -46,6 +46,9 @@
                         <barButtonItem width="291" style="plain" systemItem="fixedSpace" id="78B-CG-TdH"/>
                         <barButtonItem title="New Folder" width="430" springLoaded="YES" id="dQc-K6-JCH">
                             <color key="tintColor" systemColor="systemBrownColor" red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="newFolderButton:" destination="XSF-Ig-O2k" id="TjQ-LC-sJY"/>
+                            </connections>
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="3TN-sX-1Ex">
