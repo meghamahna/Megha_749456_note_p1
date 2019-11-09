@@ -50,6 +50,7 @@ class FolderTableViewController: UITableViewController {
             let name = alertController.textFields![0]
             self.names!.append(name.text!)
             print(self.names!)
+            self.tableView.reloadData()
             self.tableViewData.reloadData()
             
         }
@@ -83,17 +84,19 @@ class FolderTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
+            names!.remove(at: indexPath.row)
+            tableViewData.reloadData()
+        }
+        //else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        //}    
     }
-    */
+    
 
     /*
     // Override to support rearranging the table view.
