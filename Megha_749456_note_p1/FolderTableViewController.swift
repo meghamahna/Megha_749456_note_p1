@@ -4,7 +4,8 @@
 //
 //  Created by Megha Mahna on 2019-11-09.
 //  Copyright © 2019 Megha Mahna. All rights reserved.
-//
+
+//Github Repository Link: https://github.com/meghamahna/Megha_749456_note_p1.git
 
 import UIKit
 
@@ -58,9 +59,24 @@ class FolderTableViewController: UITableViewController {
             }
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             cancelAction.setValue(UIColor .brown, forKey: "titleTextColor")
-            let addItemAction = UIAlertAction(title: "Add Item", style: .default) { (UIAlertAction) in
+            let addItemAction = UIAlertAction(title: "Add Item", style: .default) { (action) in
                 let name = alertController.textFields![0]
-                self.names!.append(name.text!)
+               
+                if self.names!.contains(name.text!){
+                        
+                            let alertController1 = UIAlertController(title: "Name Taken", message: "Please choose a different name", preferredStyle: .alert)
+                            let ok = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                            alertController1.addAction(ok)
+                            self.present(alertController1, animated: true, completion: nil)
+                        
+                }
+                        
+                else {
+                        
+                            self.names!.append(name.text!)
+
+                }
+                   
                 print(self.names!)
                 self.tableView.reloadData()
                 self.tableViewData.reloadData()
