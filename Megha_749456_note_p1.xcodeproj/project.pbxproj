@@ -13,6 +13,8 @@
 		3AA111DD23773BE100297400 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AA111DC23773BE100297400 /* Assets.xcassets */; };
 		3AA111E023773BE100297400 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AA111DE23773BE100297400 /* LaunchScreen.storyboard */; };
 		3AA7621D2377A92400A5C162 /* FolderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7621C2377A92400A5C162 /* FolderTableViewController.swift */; };
+		3AA7628F237A00D900A5C162 /* NotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7628E237A00D900A5C162 /* NotesTableViewController.swift */; };
+		3AA76291237A084200A5C162 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA76290237A084200A5C162 /* NotesViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		3AA111DF23773BE100297400 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3AA111E123773BE100297400 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3AA7621C2377A92400A5C162 /* FolderTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderTableViewController.swift; sourceTree = "<group>"; };
+		3AA7628E237A00D900A5C162 /* NotesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTableViewController.swift; sourceTree = "<group>"; };
+		3AA76290237A084200A5C162 /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 				3AA111DE23773BE100297400 /* LaunchScreen.storyboard */,
 				3AA111E123773BE100297400 /* Info.plist */,
 				3AA7621C2377A92400A5C162 /* FolderTableViewController.swift */,
+				3AA7628E237A00D900A5C162 /* NotesTableViewController.swift */,
+				3AA76290237A084200A5C162 /* NotesViewController.swift */,
 			);
 			path = Megha_749456_note_p1;
 			sourceTree = "<group>";
@@ -139,6 +145,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AA111D423773BE000297400 /* AppDelegate.swift in Sources */,
+				3AA76291237A084200A5C162 /* NotesViewController.swift in Sources */,
+				3AA7628F237A00D900A5C162 /* NotesTableViewController.swift in Sources */,
 				3AA7621D2377A92400A5C162 /* FolderTableViewController.swift in Sources */,
 				3AA111D623773BE000297400 /* SceneDelegate.swift in Sources */,
 			);

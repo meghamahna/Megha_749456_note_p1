@@ -12,6 +12,7 @@ import UIKit
 class FolderTableViewController: UITableViewController {
        
         var names: [String]?
+        var array1: [String]?
         @IBOutlet weak var folderBarButton: UIBarButtonItem!
         @IBOutlet var tableViewData: UITableView!
         //var seperatorStyle: UITableViewCell.SeparatorStyle{get set}
@@ -25,7 +26,8 @@ class FolderTableViewController: UITableViewController {
           
             self.navigationItem.rightBarButtonItem = self.editButtonItem
             names = [String]()
-            navigationItem.rightBarButtonItem?.tintColor = UIColor.black
+            array1 = [String]()
+            navigationItem.rightBarButtonItem?.tintColor = UIColor.white
             navigationController?.navigationBar.barTintColor = UIColor.systemGray
             self.tableView.backgroundColor = UIColor.systemGray
             navigationController?.toolbar.barTintColor = UIColor.systemGray
@@ -74,10 +76,11 @@ class FolderTableViewController: UITableViewController {
                 else {
                         
                             self.names!.append(name.text!)
-
+ 
                 }
                    
                 print(self.names!)
+                self.array1 = self.names
                 self.tableView.reloadData()
                 self.tableViewData.reloadData()
                 
@@ -162,15 +165,23 @@ class FolderTableViewController: UITableViewController {
         }
         */
 
-        /*
+        
         // MARK: - Navigation
 
         // In a storyboard-based application, you will often want to do a little preparation before navigation
         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
             // Get the new view controller using segue.destination.
             // Pass the selected object to the new view controller.
+            if let detail = segue.destination as? NotesTableViewController{
+                detail.notesTable = self
+            }
         }
-        */
+        
+    func update(text: [String]){
+        guard array1 != nil else {return}
+        array1 = text
+        tableView.reloadData()
+    }
 
 }
   
