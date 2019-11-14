@@ -15,6 +15,8 @@
 		3AA7621D2377A92400A5C162 /* FolderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7621C2377A92400A5C162 /* FolderTableViewController.swift */; };
 		3AA7628F237A00D900A5C162 /* NotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7628E237A00D900A5C162 /* NotesTableViewController.swift */; };
 		3AA76291237A084200A5C162 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA76290237A084200A5C162 /* NotesViewController.swift */; };
+		3AA76295237B603300A5C162 /* StorageFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA76294237B603300A5C162 /* StorageFolder.swift */; };
+		3ABE0451237DD20700F298D1 /* MoveFolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABE0450237DD20700F298D1 /* MoveFolderViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		3AA7621C2377A92400A5C162 /* FolderTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderTableViewController.swift; sourceTree = "<group>"; };
 		3AA7628E237A00D900A5C162 /* NotesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTableViewController.swift; sourceTree = "<group>"; };
 		3AA76290237A084200A5C162 /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
+		3AA76294237B603300A5C162 /* StorageFolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageFolder.swift; sourceTree = "<group>"; };
+		3ABE0450237DD20700F298D1 /* MoveFolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveFolderViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +73,8 @@
 				3AA7621C2377A92400A5C162 /* FolderTableViewController.swift */,
 				3AA7628E237A00D900A5C162 /* NotesTableViewController.swift */,
 				3AA76290237A084200A5C162 /* NotesViewController.swift */,
+				3AA76294237B603300A5C162 /* StorageFolder.swift */,
+				3ABE0450237DD20700F298D1 /* MoveFolderViewController.swift */,
 			);
 			path = Megha_749456_note_p1;
 			sourceTree = "<group>";
@@ -145,7 +151,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AA111D423773BE000297400 /* AppDelegate.swift in Sources */,
+				3AA76295237B603300A5C162 /* StorageFolder.swift in Sources */,
 				3AA76291237A084200A5C162 /* NotesViewController.swift in Sources */,
+				3ABE0451237DD20700F298D1 /* MoveFolderViewController.swift in Sources */,
 				3AA7628F237A00D900A5C162 /* NotesTableViewController.swift in Sources */,
 				3AA7621D2377A92400A5C162 /* FolderTableViewController.swift in Sources */,
 				3AA111D623773BE000297400 /* SceneDelegate.swift in Sources */,

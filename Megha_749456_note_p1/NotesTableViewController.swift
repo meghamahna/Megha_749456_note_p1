@@ -10,10 +10,14 @@ import UIKit
 
 class NotesTableViewController: UITableViewController {
     
-    var notes : [String]?
+    @IBOutlet weak var trashButton: UIBarButtonItem!
+   
+    @IBOutlet weak var moveNotesButton: UIBarButtonItem!
+    
+    var selectedRows: [IndexPath]?
     var notesString : String?
-    var currentIndex = -1
-    weak var notesTable: FolderTableViewController?
+    var curIndex = -1
+    var notesTable : FolderTableViewController?
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,9 +26,16 @@ class NotesTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        notes = []
+    
+        trashButton.isEnabled = false
+        moveNotesButton.isEnabled = false
+    
     }
-
+//    func initialise(folderName: String, notes : [String] = []){
+//    
+//        folderNotes.folderName = folderName
+//        
+//    }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -34,23 +45,40 @@ class NotesTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return notes?.count ?? 0
+        return  Folder.folders[(notesTable?.curIndex)!].notes.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-               if let cellName = notes?[indexPath.row]{
-                   if let cell = tableView.dequeueReusableCell(withIdentifier: "normal"){
+       
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "normal"){
                        if let label = cell.viewWithTag(2) as? UILabel{
-                           label.text = cellName
+                        label.text = Folder.folders[(notesTable?.curIndex)!].notes[indexPath.row]
                        
                        }
                        return cell
-               }
-        }
+            }
         return UITableViewCell()
     }
+    
+//    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+//        if let oldIndex = tableView.indexPathForSelectedRow {
+//            tableView.cellForRow(at: oldIndex)?.accessoryType = .none
+//        }
+//        tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+//
+//        return indexPath
+//    }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+        
+            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+    }
+    
+    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        tableView.cellForRow(at: indexPath)?.accessoryType = .detailButton
+    }
+    
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -98,34 +126,122 @@ class NotesTableViewController: UITableViewController {
                        detailView.taskTable = self
                        if let tableViewCell = sender as? UITableViewCell {
                            if let index = tableView.indexPath(for: tableViewCell)?.row {
-                               detailView.textString = notes![index]
-                               currentIndex = index
+                                    detailView.textString = Folder.folders[(notesTable?.curIndex)!].notes[index]
+                                    curIndex = index
                            }
                        }
+        }
+                if let moveFolder = segue.destination as? MoveFolderViewController{
+                    moveFolder.notesDelegate = self
+                
                    }
+        // Get the new view controller using segue.destination.
+               // Pass the selected object to the new view controller.
         }
         func updateText(text: String){
             
-            if notes != nil && currentIndex != -1 {
-                notes![currentIndex] = text
-                let indexPath = IndexPath(item: currentIndex, section: 0)
+            if  curIndex != -1 {
+                Folder.folders[(notesTable?.curIndex)!].notes[curIndex] = text
+                let indexPath = IndexPath(item: curIndex, section: 0)
                 tableView.reloadRows(at: [indexPath], with: .none)
-                currentIndex = -1
+                curIndex = -1
             }
             
-            else if notes != nil && currentIndex == -1{
-                notes?.append(text)
+            else if curIndex == -1{
+                Folder.folders[(notesTable?.curIndex)!].notes.append(text)
                 tableView.reloadData()
+                notesTable?.reloadFolders()
+                
+                return
             }
+        
     }
             
-
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func moveNotes(index: Int){
+        
+        selectedRows = tableView.indexPathsForSelectedRows!
+        
+        for i in selectedRows!{
+            let move = Folder.folders[(notesTable?.curIndex)!].notes[i.row]
+            Folder.folders[index].notes.append(move)
+        }
+        
+        deleteRows()
+    }
     
-   override func viewWillDisappear(_ animated: Bool) {
-    notesTable?.update(text: notes!)
-   }
+    func deleteRows(){
+        
+        selectedRows = tableView.indexPathsForSelectedRows!
+        var items = [String]()
+        for indexpath in selectedRows!{
+            
+            items.append(Folder.folders[(notesTable?.curIndex)!].notes[indexpath.row])
+            
+        }
+        
+        for value in items{
+            
+            if let index = Folder.folders[(notesTable?.curIndex)!].notes.firstIndex(of: value)
+            {
+                Folder.folders[(notesTable?.curIndex)!].notes.remove(at: index)
+            }
+        }
+        tableView.reloadData()
+        notesTable?.tableView.reloadData()
+    }
+
+
+    
+    @IBAction func dotsButton(_ sender: Any) {
+        
+        if trashButton.isEnabled == false && moveNotesButton.isEnabled == false{
+               
+                                 trashButton.isEnabled = true
+                                 moveNotesButton.isEnabled = true
+               
+                             }
+
+                             else if  trashButton.isEnabled == true && moveNotesButton.isEnabled == true{
+
+                                 trashButton.isEnabled = false
+                                 moveNotesButton.isEnabled = false
+
+                             }
+    }
+    
+    @IBAction func trashButtonAction(_ sender: UIBarButtonItem) {
+        let alertcontroller = UIAlertController(title: "Delete ", message: "Are you sure", preferredStyle: .alert)
+          
+        let CancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        CancelAction.setValue(UIColor.brown, forKey: "titleTextColor")
+        let trashItemAction = UIAlertAction(title: "Delete", style: .default)
+        {(action1) in
+           
+           if let selectedRows = self.tableView.indexPathsForSelectedRows {
+        
+           var items = [String]()
+           for indexPath in selectedRows  {
+            items.append(Folder.folders[(self.notesTable?.curIndex)!].notes[indexPath.row])
+           }
+           for item in items {
+            if let index = Folder.folders[(self.notesTable?.curIndex)!].notes.lastIndex(of: item) {
+                Folder.folders[(self.notesTable?.curIndex)!].notes.remove(at: index)
+               }
+           }
+               self.tableView.deleteRows(at: selectedRows, with: .automatic)
+               self.tableView.reloadData()
+           }
+           }
+                        trashItemAction.setValue(UIColor.red, forKey: "titleTextColor")
+                        alertcontroller.addAction(CancelAction)
+                        alertcontroller.addAction(trashItemAction)
+                        self.present(alertcontroller, animated: true, completion: nil)
+    }
+    
+   
+    
+   
+
    
 }
     
